@@ -49,3 +49,96 @@ protobuf {
         }
     }
 }
+
+// TODO: figure out a way to put this in a function or something so that we can put it
+// into buildSrc and call it from different libs with different github URLs etc.
+
+publishing {
+    publications {
+        create<MavenPublication>("mavenJava") {
+            from(components["java"])
+            groupId = "software.momento.java"
+//            groupId = "software.momento"
+            artifactId = "client-protos"
+//            artifactId = "client-protos-java"
+//            version = "0.1.0-SNAPSHOT"
+
+//            artifact(tasks.named("javadocJar"))
+            with(pom) {
+                name.set(rootProject.name)
+                url.set("https://github.com/momentohq/client_protos")
+                description.set("Protobuf protos for Momento gRPC services")
+                scm {
+                    url.set("https://github.com/momentohq/client_protos.git")
+                }
+                developers {
+//                    developer {
+//                        id.set("cprice404")
+//                        name.set("Chris Price")
+//                    }
+                }
+                licenses {
+                    license {
+                        name.set("The Apache License, Version 2.0")
+                        url.set("http://www.apache.org/licenses/LICENSE-2.0.txt")
+                    }
+                }
+            }
+        }
+    }
+//    repositories {
+//        maven {
+//            url = if (version.toString().endsWith("SNAPSHOT")) {
+//                uri(mavenSnapshotUrl)
+//            } else {
+//                uri(mavenUrl)
+//            }
+//            credentials {
+//                username = sonatypeUsername
+//                password = sonatypePassword
+//            }
+//        }
+//    }
+}
+
+//
+//configure<PublishingExtension> {
+//    components.all {
+//        publications.withType<MavenPublication> {
+//            artifact(tasks.named("javadocJar"))
+//            with(pom) {
+//                name.set(rootProject.name)
+//                url.set("https://github.com/momentohq/client_protos")
+//                description.set("Protobuf protos for Momento gRPC services")
+//                scm {
+//                    url.set("https://github.com/momentohq/client_protos.git")
+//                }
+//                developers {
+////                    developer {
+////                        id.set("cprice404")
+////                        name.set("Chris Price")
+////                    }
+//                }
+//                licenses {
+//                    license {
+//                        name.set("The Apache License, Version 2.0")
+//                        url.set("http://www.apache.org/licenses/LICENSE-2.0.txt")
+//                    }
+//                }
+//            }
+//        }
+//    }
+//    repositories {
+//        maven {
+//            url = if (version.toString().endsWith("SNAPSHOT")) {
+//                uri(mavenSnapshotUrl)
+//            } else {
+//                uri(mavenUrl)
+//            }
+//            credentials {
+//                username = sonatypeUsername
+//                password = sonatypePassword
+//            }
+//        }
+//    }
+//}
